@@ -2,6 +2,8 @@
 
 Crowdfunding project created as part of the B9LabAcademy Ethereum course
 
+Available at: https://github.com/isaidgitout/b9lab_crowdfund
+
 Author: Nikesh Nazareth
 
 ## Difference from task description

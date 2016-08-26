@@ -9,15 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var fundinghub_contract_service_1 = require('./blockchain/fundinghub-contract/fundinghub-contract.service');
+var project_contract_service_1 = require('./blockchain/project-contract/project-contract.service');
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(fundingHubService, projectService) {
+        this.fundingHubService = fundingHubService;
+        this.projectService = projectService;
+        var params = [];
+        fundingHubService.getProjectAddresses()
+            .then(function (addresses) {
+            var projectPromises = [];
+            for (var i = 0; i < addresses.length; i++) {
+                projectPromises.push(projectService.getProjectParams(addresses[i])
+                    .then(function (p) {
+                    params.push(p);
+                }));
+            }
+            return Promise.all(projectPromises);
+        })
+            .then(function () {
+            console.log(params);
+        });
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: '<h1>My First Angular 2 App</h1>'
+            templateUrl: 'app/app.component.html',
+            providers: [fundinghub_contract_service_1.FundingHubService, project_contract_service_1.ProjectService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [fundinghub_contract_service_1.FundingHubService, project_contract_service_1.ProjectService])
     ], AppComponent);
     return AppComponent;
 }());

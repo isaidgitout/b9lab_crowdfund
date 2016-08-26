@@ -11,9 +11,12 @@
     <script src="node_modules/systemjs/dist/system.src.js"></script>
     <!-- 2. Configure SystemJS -->
     <script src="systemjs.config.js"></script>
+    <!-- Include the truffle build file -->
+    <script src="build/app.js"></script>
     <script>
         System.import('app').catch(function(err){ console.error(err); });
     </script>
+
 </head>
 <!-- 3. Display the application -->
 <body>

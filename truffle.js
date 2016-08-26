@@ -1,6 +1,6 @@
 module.exports = {
   build: {
-    "contracts.js": []
+    "app.js": []
   },
   deploy: [
     'FundingHub'

@@ -100,14 +100,16 @@ contract Project {
      * @return description {string} a description of the project
      * @return owner {address} the owner of the project (ie. the one who will receive the funds if it is funded)
      * @return target {uint} the target amount (in Wei) that the project needs to reach to be funded
+     * @return total {uint} the amount of Wei raised so far
      * @return deadline {uint} the deadline for the project to be funded
      * @return stage {Stages} the current stage
      */
-    function getProjectParams() returns (string name, string desc, address owner, uint target, uint deadline, Stages stage){
+    function getProjectParams() returns (string name, string desc, address owner, uint target, uint total, uint deadline, Stages stage){
         name = params.name;
         desc = params.desc;
         owner = params.owner;
         target = params.target;
+        total = this.balance;
         deadline = params.deadline;
         stage = params.stage;
     }

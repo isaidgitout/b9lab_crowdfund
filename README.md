@@ -41,3 +41,9 @@ _npm run start_
 Run the tests:
 
 _truffle test_
+
+Note: for reasons I did not get time to debug
+ - I could not use testrpc to deploy the FundingHub contract because it gave the error "Error: tx has a higher gas limit than the block"
+ - I could not use geth to deploy the FundingHub contract using the 'contract' clause because it hangs and then times out
+ 
+Instead, I have given an example test that is similar to the ones I used for the main project, but I could not test the _refund_ function properly

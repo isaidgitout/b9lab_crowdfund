@@ -24,7 +24,7 @@ var AppComponent = (function () {
         this.refreshProjects();
     }
     AppComponent.prototype.openProjects = function () {
-        return this.projects.filter(function (project) { return project.stage == 0; });
+        return this.projects.filter(function (project) { return project.stage == 'Open'; });
     };
     AppComponent.prototype.refreshProjects = function () {
         var _this = this;

@@ -2,6 +2,16 @@
 
 <h3>Open Projects</h3>
 
-<div *ngFor="let project of projects">
-    <div>Name: {{project.name}}</div>
+<div class="container" *ngFor="let project of projects">
+    <h4>{{project.name}}</h4>
+    <ul class="list-group">
+        <li class="list-group-item"><label>Description:</label> <span>{{project.desc}}</span></li>
+        <li class="list-group-item"><label>Address:</label> <span>{{project.address}}</span></li>
+        <li class="list-group-item"><label>Owner:</label> <span>{{project.address}}</span></li>
+        <li class="list-group-item"><label>Project Goal:</label> <span>{{project.target}}</span></li>
+        <li class="list-group-item"><label>Amount Raised:</label> <span>{{project.raised}}</span></li>
+        <li class="list-group-item"><label>Time Left (hours):</label> <span>{{project.hours_remaining}}</span></li>
+    </ul>
 </div>
+
+

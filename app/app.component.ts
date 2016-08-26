@@ -27,7 +27,7 @@ export class AppComponent {
     }
 
     openProjects(): ProjectParams[] {
-        return this.projects.filter((project: ProjectParams) => project.stage == 0);
+        return this.projects.filter((project: ProjectParams) => project.stage == 'Open');
     }
 
     refreshProjects() {
@@ -35,7 +35,7 @@ export class AppComponent {
 
         this.fundingHubService.getProjectAddresses()
             .then( (addresses) => {
-                var projectPromises: ProjectParams[] = [];
+                var projectPromises = [];
 
                 for (var i = 0; i < addresses.length; i++) {
                     projectPromises.push(

@@ -35,7 +35,7 @@ var FundingHubService = (function () {
         return promise;
     };
     FundingHubService.prototype.createProject = function (name, description, owner, target, deadline) {
-        this.contract.createProject(name, description, owner, target, deadline)
+        this.contract.createProject(name, description, owner, target, deadline, { from: owner, gas: 3000000 })
             .catch(function (err) {
             alert(err);
         });

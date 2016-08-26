@@ -7,7 +7,7 @@ declare var FundingHub: any;
 
 export interface IFundingHubService {
     getProjectAddresses(): Promise<string[]>;
-    createProject(name: string, description: string, owner: string, target: string, deadline: string);
+    createProject(name: string, description: string, owner: string, target: string, deadline: number);
 }
 
 export class FundingHubService implements IFundingHubService {
@@ -51,8 +51,8 @@ export class FundingHubService implements IFundingHubService {
         return promise;
     }
 
-    createProject(name: string, description: string, owner: string, target: string, deadline: string) {
-        this.contract.createProject(name, description, owner, target, deadline)
+    createProject(name: string, description: string, owner: string, target: string, deadline: number) {
+        this.contract.createProject(name, description, owner, target, deadline, {from: owner, gas: 3000000})
         .catch( err => {
             alert(err);
         });

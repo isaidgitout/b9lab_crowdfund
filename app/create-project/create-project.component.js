@@ -30,7 +30,7 @@ var CreateProjectComponent = (function () {
         var owner = this.createProjectForm.controls['owner'].value;
         var target = this.createProjectForm.controls['target'].value;
         var now = web3.eth.getBlock(web3.eth.blockNumber).timestamp;
-        var deadline = String(now + parseInt(this.createProjectForm.controls['duration'].value) * 3600);
+        var deadline = now + parseInt(this.createProjectForm.controls['duration'].value) * 3600;
         this.fundingHubService.createProject(name, description, owner, target, deadline);
     };
     CreateProjectComponent.prototype.getAccounts = function () {

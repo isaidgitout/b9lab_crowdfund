@@ -32,7 +32,7 @@ export class CreateProjectComponent {
         var owner :string = this.createProjectForm.controls['owner'].value;
         var target: string = this.createProjectForm.controls['target'].value;
         var now: number = web3.eth.getBlock(web3.eth.blockNumber).timestamp;
-        var deadline: string = String(now + parseInt(this.createProjectForm.controls['duration'].value) * 3600);
+        var deadline: number = now + parseInt(this.createProjectForm.controls['duration'].value) * 3600;
         this.fundingHubService.createProject(name, description, owner, target, deadline);
     }
 

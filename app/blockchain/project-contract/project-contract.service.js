@@ -16,6 +16,7 @@ var ProjectService = (function () {
                     throw new Error('Could not find a Project contract at address ' + address);
                 }
                 params = {
+                    address: address,
                     name: result[0],
                     desc: result[1],
                     owner: result[2],

@@ -3,6 +3,8 @@ import {FundingHubService} from './blockchain/fundinghub-contract/fundinghub-con
 import {ProjectService} from './blockchain/project-contract/project-contract.service';
 import {ProjectParams} from './blockchain/project-contract/project-contract.service';
 
+// defined the the truffle app.js file
+declare var web3: any;
 
 @Component({
     selector: 'my-app',
@@ -11,25 +13,42 @@ import {ProjectParams} from './blockchain/project-contract/project-contract.serv
 })
 export class AppComponent {
 
+    private projects: ProjectParams[];
+
     constructor(private fundingHubService: FundingHubService, private projectService: ProjectService){
-        var params = [];
+        this.projects = [];
 
-        fundingHubService.getProjectAddresses()
-        .then( (addresses) => {
-            var projectPromises: ProjectParams[] = [];
+        var filter = web3.eth.filter('latest');
+        filter.watch((error, result) => {
+            this.refreshProjects();
+        })
 
-            for (var i = 0; i < addresses.length; i++) {
-                projectPromises.push(
-                    projectService.getProjectParams(addresses[i])
-                    .then((p: ProjectParams) => {
-                        params.push(p);
-                    })
-                )
-            }
-            return Promise.all(projectPromises);
-        })
-        .then(() => {
-            console.log(params);
-        })
+        this.refreshProjects();
+    }
+
+    openProjects(): ProjectParams[] {
+        return this.projects.filter((project: ProjectParams) => project.stage == 0);
+    }
+
+    refreshProjects() {
+        var newProjects = [];
+
+        this.fundingHubService.getProjectAddresses()
+            .then( (addresses) => {
+                var projectPromises: ProjectParams[] = [];
+
+                for (var i = 0; i < addresses.length; i++) {
+                    projectPromises.push(
+                        this.projectService.getProjectParams(addresses[i])
+                            .then((p: ProjectParams) => {
+                                newProjects.push(p);
+                            })
+                    )
+                }
+                return Promise.all(projectPromises);
+            })
+            .then(() => {
+                this.projects = newProjects;
+            })
     }
 }

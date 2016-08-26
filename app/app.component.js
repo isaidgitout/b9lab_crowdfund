@@ -13,24 +13,37 @@ var fundinghub_contract_service_1 = require('./blockchain/fundinghub-contract/fu
 var project_contract_service_1 = require('./blockchain/project-contract/project-contract.service');
 var AppComponent = (function () {
     function AppComponent(fundingHubService, projectService) {
+        var _this = this;
         this.fundingHubService = fundingHubService;
         this.projectService = projectService;
-        var params = [];
-        fundingHubService.getProjectAddresses()
+        this.projects = [];
+        var filter = web3.eth.filter('latest');
+        filter.watch(function (error, result) {
+            _this.refreshProjects();
+        });
+        this.refreshProjects();
+    }
+    AppComponent.prototype.openProjects = function () {
+        return this.projects.filter(function (project) { return project.stage == 0; });
+    };
+    AppComponent.prototype.refreshProjects = function () {
+        var _this = this;
+        var newProjects = [];
+        this.fundingHubService.getProjectAddresses()
             .then(function (addresses) {
             var projectPromises = [];
             for (var i = 0; i < addresses.length; i++) {
-                projectPromises.push(projectService.getProjectParams(addresses[i])
+                projectPromises.push(_this.projectService.getProjectParams(addresses[i])
                     .then(function (p) {
-                    params.push(p);
+                    newProjects.push(p);
                 }));
             }
             return Promise.all(projectPromises);
         })
             .then(function () {
-            console.log(params);
+            _this.projects = newProjects;
         });
-    }
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',

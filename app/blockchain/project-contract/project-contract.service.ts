@@ -7,6 +7,7 @@ declare var Project: any;
 declare var web3: any;
 
 export interface ProjectParams {
+    address: string;
     name: string;
     desc: string;
     owner: string;
@@ -34,6 +35,7 @@ export class ProjectService implements IProjectService {
                         throw new Error('Could not find a Project contract at address ' + address);
                     }
                     params = {
+                        address: address,
                         name: result[0],
                         desc: result[1],
                         owner: result[2],

@@ -1,17 +1,17 @@
 <h1>Crowd fund on the blockchain</h1>
 
-<h3>Open Projects</h3>
+<h3>
+    <button *ngIf="!showCreateForm" class="glyphicon glyphicon-plus" (click)="showCreateForm=true"></button>
+    <button *ngIf="showCreateForm" class="glyphicon glyphicon-minus" (click)="showCreateForm=false"></button>
+    Add Your Own Project
+</h3>
+<create-project *ngIf="showCreateForm"></create-project>
 
-<div class="container" *ngFor="let project of projects">
-    <h4>{{project.name}}</h4>
-    <ul class="list-group">
-        <li class="list-group-item"><label>Description:</label> <span>{{project.desc}}</span></li>
-        <li class="list-group-item"><label>Address:</label> <span>{{project.address}}</span></li>
-        <li class="list-group-item"><label>Owner:</label> <span>{{project.owner}}</span></li>
-        <li class="list-group-item"><label>Project Goal:</label> <span>{{project.target}}</span></li>
-        <li class="list-group-item"><label>Amount Raised:</label> <span>{{project.raised}}</span></li>
-        <li class="list-group-item"><label>Time Left (hours):</label> <span>{{project.hours_remaining}}</span></li>
-    </ul>
-</div>
+<h3>
+    <button *ngIf="!showActiveProjects" class="glyphicon glyphicon-plus" (click)="showActiveProjects=true"></button>
+    <button *ngIf="showActiveProjects" class="glyphicon glyphicon-minus" (click)="showActiveProjects=false"></button>
+    Active Projects
+</h3>
+<active-projects *ngIf="showActiveProjects"></active-projects>
 
 

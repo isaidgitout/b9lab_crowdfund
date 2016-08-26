@@ -19,6 +19,7 @@ export interface ProjectParams {
 
 export interface IProjectService {
     getProjectParams(address: string): Promise<ProjectParams>;
+    fundProject(address: string, account: string, amount: string);
 }
 
 export class ProjectService implements IProjectService {
@@ -54,6 +55,15 @@ export class ProjectService implements IProjectService {
         });
 
         return promise;
+    }
+
+    fundProject(address: string, account:string, amount: string){
+        var projectInstance = Project.at(address);
+
+        projectInstance.fund({from: account, value: amount})
+            .catch(err => {
+                alert(err);
+            })
     }
 
 

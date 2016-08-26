@@ -28,7 +28,7 @@ Install dependencies:
 
 _npm install_
 
-Deploy the contract:
+Deploy the contracts:
 
 Ensure your local node is listening at localhost:8545
 
@@ -47,3 +47,9 @@ Note: for reasons I did not get time to debug
  - I could not use geth to deploy the FundingHub contract using the 'contract' clause because it hangs and then times out
  
 Instead, I have given an example test that is similar to the ones I used for the main project, but I could not test the _refund_ function properly
+
+
+## Implementation Notes
+
+Angular 2 uses Zone.js which has a known bug. Specifically, sometimes the error "More tasks executed than were scheduled" is thrown. 
+This does not effect any functionality. The recommended solution is (no joke) to comment out the error message in zone.js until they address they underlying issue.

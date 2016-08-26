@@ -35,6 +35,13 @@ var ProjectService = (function () {
         });
         return promise;
     };
+    ProjectService.prototype.fundProject = function (address, account, amount) {
+        var projectInstance = Project.at(address);
+        projectInstance.fund({ from: account, value: amount })
+            .catch(function (err) {
+            alert(err);
+        });
+    };
     /**
      * Determine how many hours into the future a timestamp is (using the last block as a reference)
      */

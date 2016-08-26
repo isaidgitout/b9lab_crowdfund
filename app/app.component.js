@@ -9,48 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var fundinghub_contract_service_1 = require('./blockchain/fundinghub-contract/fundinghub-contract.service');
-var project_contract_service_1 = require('./blockchain/project-contract/project-contract.service');
+var create_project_component_1 = require('./create-project/create-project.component');
+var active_projects_component_1 = require('./active-projects/active-projects.component');
 var AppComponent = (function () {
-    function AppComponent(fundingHubService, projectService) {
-        var _this = this;
-        this.fundingHubService = fundingHubService;
-        this.projectService = projectService;
-        this.projects = [];
-        var filter = web3.eth.filter('latest');
-        filter.watch(function (error, result) {
-            _this.refreshProjects();
-        });
-        this.refreshProjects();
+    function AppComponent() {
+        this.showCreateForm = false;
+        this.showActiveProjects = false;
     }
-    AppComponent.prototype.openProjects = function () {
-        return this.projects.filter(function (project) { return project.stage == 'Open'; });
-    };
-    AppComponent.prototype.refreshProjects = function () {
-        var _this = this;
-        var newProjects = [];
-        this.fundingHubService.getProjectAddresses()
-            .then(function (addresses) {
-            var projectPromises = [];
-            for (var i = 0; i < addresses.length; i++) {
-                projectPromises.push(_this.projectService.getProjectParams(addresses[i])
-                    .then(function (p) {
-                    newProjects.push(p);
-                }));
-            }
-            return Promise.all(projectPromises);
-        })
-            .then(function () {
-            _this.projects = newProjects;
-        });
-    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
             templateUrl: 'app/app.component.html',
-            providers: [fundinghub_contract_service_1.FundingHubService, project_contract_service_1.ProjectService]
+            directives: [create_project_component_1.CreateProjectComponent, active_projects_component_1.ActiveProjectsComponent]
         }), 
-        __metadata('design:paramtypes', [fundinghub_contract_service_1.FundingHubService, project_contract_service_1.ProjectService])
+        __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
 }());

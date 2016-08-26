@@ -1,0 +1,29 @@
+<div class="container">
+    <form [formGroup]="createProjectForm" (submit)="create()">
+        <div>
+            <label>Project Name: </label>
+            <div><input type="text" formControlName="name"></div>
+        </div>
+        <div>
+            <label>Description: </label>
+            <div><input type="text" formControlName="desc"></div>
+        </div>
+        <div>
+            <label>Owner: </label><span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Choose the account that will receive the funds if successful. Make sure it is unlocked before submitting the project"></span>
+            <div><select formControlName="owner">
+                <option *ngFor="let a of getAccounts()" [value]="a">{{a}}</option>
+            </select></div>
+        </div>
+        <div>
+            <label>Funding Goal (in Wei):</label>
+            <div><input type="text" formControlName="target"></div>
+        </div>
+        <div>
+            <label>Crowdfund Duration (in hours):</label>
+            <div><input type="text" formControlName="duration"></div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-default">Create</button>
+        </div>
+    </form>
+</div>

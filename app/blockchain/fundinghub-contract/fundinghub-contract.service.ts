@@ -64,6 +64,7 @@ export class FundingHubService implements IFundingHubService {
      * @param deadline {number} a timestamp indicating when the crowd funding period is over
      */
     createProject(name: string, description: string, owner: string, target: string, deadline: number) {
+        // I needed to increase the gas limit to get this transaction to be accepted
         this.contract.createProject(name, description, owner, target, deadline, {from: owner, gas: 3000000})
         .catch( err => {
             alert(err);

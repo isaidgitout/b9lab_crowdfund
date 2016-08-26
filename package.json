@@ -9,7 +9,7 @@
     "tsc:w": "tsc -w",
     "typings": "typings",
     "test": "testrpc -p 8545 | (truffle deploy && truffle test)",
-    "migrate": "rm build/* && truffle migrate && truffle build"
+    "migrate": "rm -r build/* && truffle migrate && truffle build"
   },
   "license": "ISC",
   "dependencies": {

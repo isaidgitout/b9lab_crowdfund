@@ -44,7 +44,7 @@ var ProjectService = (function () {
             return 0;
         }
         else {
-            return (timestamp - currentTime) / 3600;
+            return Math.floor((timestamp - currentTime) / 3600);
         }
     };
     /**

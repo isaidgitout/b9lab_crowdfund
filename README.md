@@ -24,14 +24,20 @@ In this situation, all other contributors are prevented from getting their refun
 
 ## Usage
 
-Install dependencies with
+Install dependencies:
 
 _npm install_
 
-Launch the app with 
+Deploy the contract:
+
+Ensure your local node is listening at localhost:8545
+
+_npm run migrate_
+
+Launch the app: 
 
 _npm run start_ 
 
-Run the tests with
+Run the tests:
 
 _truffle test_

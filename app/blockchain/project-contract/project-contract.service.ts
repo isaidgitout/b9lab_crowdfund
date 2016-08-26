@@ -65,7 +65,7 @@ export class ProjectService implements IProjectService {
         if(currentTime > timestamp) {
             return 0;
         } else {
-            return (timestamp - currentTime) / 3600;
+            return Math.floor((timestamp - currentTime) / 3600);
         }
     }
 

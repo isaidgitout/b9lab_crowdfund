@@ -20,3 +20,18 @@ This is to avoid a few possible error conditions:
   
 In this particular case, if the _refund_ code were to cycle through contributors and send their money back, any one of the contributors could be a contract whose fallback function throws an error. 
 In this situation, all other contributors are prevented from getting their refund (which leaves them vulnerable to extortion)
+
+
+## Usage
+
+Install dependencies with
+
+_npm install_
+
+Launch the app with 
+
+_npm run start_ 
+
+Run the tests with
+
+_truffle test_

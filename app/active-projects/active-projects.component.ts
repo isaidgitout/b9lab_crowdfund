@@ -38,7 +38,8 @@ export class ActiveProjectsComponent {
     }
 
     openProjects(): ProjectParams[] {
-        return this.projects.filter((project: ProjectParams) => project.stage == 'Open');
+        var openProjects: ProjectParams[] = this.projects.filter((project: ProjectParams) => project.stage == 'Open');
+        return openProjects.sort((a: ProjectParams, b:ProjectParams) => { return a.name < b.name ? -1 : 1});
     }
 
     refreshProjects() {

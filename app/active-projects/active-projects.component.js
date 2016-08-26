@@ -31,7 +31,8 @@ var ActiveProjectsComponent = (function () {
         this.refreshProjects();
     }
     ActiveProjectsComponent.prototype.openProjects = function () {
-        return this.projects.filter(function (project) { return project.stage == 'Open'; });
+        var openProjects = this.projects.filter(function (project) { return project.stage == 'Open'; });
+        return openProjects.sort(function (a, b) { return a.name < b.name ? -1 : 1; });
     };
     ActiveProjectsComponent.prototype.refreshProjects = function () {
         var _this = this;

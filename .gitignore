@@ -1,2 +1,8 @@
 # IDE Configuration files
 .idea
+
+# Node packages
+node_modules
+
+# Typescript typings
+typings

@@ -1,17 +1,9 @@
 module.exports = {
   build: {
-    "index.html": "index.html",
-    "app.js": [
-      "javascripts/app.js"
-    ],
-    "app.css": [
-      "stylesheets/app.css"
-    ],
-    "images/": "images/"
+    "contracts.js": []
   },
   deploy: [
-    "MetaCoin",
-    "ConvertLib"
+    'FundingHub'
   ],
   rpc: {
     host: "localhost",

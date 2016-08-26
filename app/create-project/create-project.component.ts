@@ -25,7 +25,11 @@ export class CreateProjectComponent {
         });
     };
 
-
+    /**
+     * Retrieves the new project details (name, description, owner, goal amount, crowd fund duration)
+     * from the web form and sends the appropriate transaction to the FundingHub on the blockchain
+     * to create the project
+     */
     create() {
         var name: string = this.createProjectForm.controls['name'].value;
         var description: string = this.createProjectForm.controls['desc'].value;
@@ -36,6 +40,9 @@ export class CreateProjectComponent {
         this.fundingHubService.createProject(name, description, owner, target, deadline);
     }
 
+    /**
+     * @returns {string[]} the list of ethereum addresses managed by the local node
+     */
     getAccounts() {
         return web3.eth.accounts;
     }

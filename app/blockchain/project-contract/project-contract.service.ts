@@ -24,7 +24,11 @@ export interface IProjectService {
 
 export class ProjectService implements IProjectService {
 
-
+    /**
+     * Retrieves the project parameters associated with the Project contract at the specified address
+     * @param address {string} the blockchain address of the Project contract
+     * @returns {Promise<ProjectParams>} a promise that resolves to the ProjectParams object when the blockchain request is complete
+     */
     getProjectParams(address: string) {
         var params: ProjectParams;
         var projectInstance = Project.at(address);
@@ -57,6 +61,12 @@ export class ProjectService implements IProjectService {
         return promise;
     }
 
+    /**
+     * Sends money to a project to help fund it
+     * @param address {string} the contract address of the project to fund
+     * @param account {string} the address to send the money from
+     * @param amount {string} the amount of money (in Wei) to send
+     */
     fundProject(address: string, account:string, amount: string){
         var projectInstance = Project.at(address);
 
@@ -68,7 +78,10 @@ export class ProjectService implements IProjectService {
 
 
     /**
-     * Determine how many hours into the future a timestamp is (using the last block as a reference)
+     * Determines the time difference (in hours) between the specified (future) timestamp and
+     * the current time, as determined by the latest block
+      * @param timestamp {number} the timestamp
+     * @returns {number} the number of hours until that timestamp is reached (or zero if it has passed)
      */
     hoursRemaining(timestamp: number) {
         var currentTime = web3.eth.getBlock(web3.eth.blockNumber).timestamp;
@@ -79,10 +92,13 @@ export class ProjectService implements IProjectService {
         }
     }
 
+
     /**
-     * Return the name of the project stage corresponding to the Stage enum index
+     * Determines the project stage name based on the stage index
+     * @param index {number} the index of the stages in the Project contract's Stages enum
+     * @returns {string} the name of the corresponding stage
      */
-    stage(index: number){
+     stage(index: number){
         var stages: string[] = ['Open', 'Refund', 'FundingAchieved', 'Complete'];
         if(index >= stages.length) {
             throw new Error('Invalid stage ' + index);

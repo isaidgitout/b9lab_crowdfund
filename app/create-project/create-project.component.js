@@ -24,6 +24,11 @@ var CreateProjectComponent = (function () {
         });
     }
     ;
+    /**
+     * Retrieves the new project details (name, description, owner, goal amount, crowd fund duration)
+     * from the web form and sends the appropriate transaction to the FundingHub on the blockchain
+     * to create the project
+     */
     CreateProjectComponent.prototype.create = function () {
         var name = this.createProjectForm.controls['name'].value;
         var description = this.createProjectForm.controls['desc'].value;
@@ -33,6 +38,9 @@ var CreateProjectComponent = (function () {
         var deadline = now + parseInt(this.createProjectForm.controls['duration'].value) * 3600;
         this.fundingHubService.createProject(name, description, owner, target, deadline);
     };
+    /**
+     * @returns {string[]} the list of ethereum addresses managed by the local node
+     */
     CreateProjectComponent.prototype.getAccounts = function () {
         return web3.eth.accounts;
     };

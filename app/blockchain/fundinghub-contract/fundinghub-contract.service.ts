@@ -18,6 +18,10 @@ export class FundingHubService implements IFundingHubService {
         this.contract = FundingHub.deployed();
     }
 
+    /**
+     * Retrieves the list of project addresses managed by the FundingHub
+     * @returns {Promise<string[]>} A promise that resolves to the project list when all blockchain requests are complete
+     */
     getProjectAddresses(): Promise<string[]> {
         var numProjects: number;
         var projects: string [] = [];
@@ -51,6 +55,14 @@ export class FundingHubService implements IFundingHubService {
         return promise;
     }
 
+    /**
+     * Sends the specified parameters to the FundingHub to create a new project
+     * @param name {string} the name of the project
+     * @param description {string} a description of the project
+     * @param owner {string} the address of the person who owns the project (who will receive the money when it is funded)
+     * @param target {string} the crowd funding goal
+     * @param deadline {number} a timestamp indicating when the crowd funding period is over
+     */
     createProject(name: string, description: string, owner: string, target: string, deadline: number) {
         this.contract.createProject(name, description, owner, target, deadline, {from: owner, gas: 3000000})
         .catch( err => {

@@ -30,10 +30,19 @@ var ActiveProjectsComponent = (function () {
         });
         this.refreshProjects();
     }
+    /**
+     * Filters the list of projects to those that are still active (as determined by their on-chain 'stage' parameter
+     * @returns {ProjectParams[]} the list of open projects
+     */
     ActiveProjectsComponent.prototype.openProjects = function () {
         var openProjects = this.projects.filter(function (project) { return project.stage == 'Open'; });
-        return openProjects.sort(function (a, b) { return a.name < b.name ? -1 : 1; });
+        return openProjects.sort(function (a, b) {
+            return a.name < b.name ? -1 : 1;
+        });
     };
+    /**
+     * Cycles through all project in the FundingHub and retrieves the project parameters
+     */
     ActiveProjectsComponent.prototype.refreshProjects = function () {
         var _this = this;
         var newProjects = [];
@@ -52,12 +61,23 @@ var ActiveProjectsComponent = (function () {
             _this.projects = newProjects;
         });
     };
+    /**
+     * @returns {string[]} the list of ethereum addresses managed by the local node
+     */
     ActiveProjectsComponent.prototype.getAccounts = function () {
         return web3.eth.accounts;
     };
+    /**
+     * Used by the individual project controls to choose the address of the project to send money to
+     * @param address {string} the address of the project to send money to
+     */
     ActiveProjectsComponent.prototype.setAddress = function (address) {
         this.contributeForm.controls['address'].value = address;
     };
+    /**
+     * Retrieves the destination address, sender account and contribution amount from the web form
+     * and sends appropriate transaction to the project on the blockchain
+     */
     ActiveProjectsComponent.prototype.contribute = function () {
         var address = this.contributeForm.controls['address'].value;
         var account = this.contributeForm.controls['account'].value;

@@ -9,7 +9,5 @@ module.exports = function (deployer) {
         var deadline = web3.eth.getBlock(web3.eth.blockNumber).timestamp + 10000;
 
         hub.createProject(name, desc, owner, target, deadline);
-        hub.createProject("otherproject", "bebetter", owner, target, deadline + 20000);
-
     });
 };
